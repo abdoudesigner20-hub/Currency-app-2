@@ -22,8 +22,8 @@ jobs:
         run: |
           mkdir -p www
           cp index.html www/index.html
-          cp icon.png  www/icon.png
-          cp icon2.png www/icon2.png
+          cp icon.png   www/icon.png
+          cp icon2.png  www/icon2.png
           cp manifest.json www/manifest.json
 
       - name: Init Capacitor
@@ -32,13 +32,21 @@ jobs:
       - name: Sync
         run: npx cap sync android
 
-      - name: Generate app icons from 512x512 icon2.png
+      - name: Replace app icons (fix adaptive icon override)
         run: |
+          # حذف ملفات XML الافتراضية التي تتجاهل الأيقونات المخصصة
+          rm -rf android/app/src/main/res/mipmap-anydpi-v26
+          rm -f  android/app/src/main/res/drawable/ic_launcher_background.xml
+          rm -f  android/app/src/main/res/drawable-v24/ic_launcher_foreground.xml
+
+          # إنشاء مجلدات الأيقونات
           mkdir -p android/app/src/main/res/mipmap-mdpi
           mkdir -p android/app/src/main/res/mipmap-hdpi
           mkdir -p android/app/src/main/res/mipmap-xhdpi
           mkdir -p android/app/src/main/res/mipmap-xxhdpi
           mkdir -p android/app/src/main/res/mipmap-xxxhdpi
+
+          # توليد الأيقونات من icon2.png (512×512)
           convert icon2.png -resize 48x48   android/app/src/main/res/mipmap-mdpi/ic_launcher.png
           convert icon2.png -resize 48x48   android/app/src/main/res/mipmap-mdpi/ic_launcher_round.png
           convert icon2.png -resize 72x72   android/app/src/main/res/mipmap-hdpi/ic_launcher.png
