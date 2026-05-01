@@ -22,7 +22,8 @@ jobs:
         run: |
           mkdir -p www
           cp index.html www/index.html
-          cp icon.png www/icon.png
+          cp icon.png  www/icon.png
+          cp icon2.png www/icon2.png
           cp manifest.json www/manifest.json
 
       - name: Init Capacitor
@@ -31,23 +32,23 @@ jobs:
       - name: Sync
         run: npx cap sync android
 
-      - name: Generate app icons
+      - name: Generate app icons from 512x512 icon2.png
         run: |
           mkdir -p android/app/src/main/res/mipmap-mdpi
           mkdir -p android/app/src/main/res/mipmap-hdpi
           mkdir -p android/app/src/main/res/mipmap-xhdpi
           mkdir -p android/app/src/main/res/mipmap-xxhdpi
           mkdir -p android/app/src/main/res/mipmap-xxxhdpi
-          convert icon.png -resize 48x48   android/app/src/main/res/mipmap-mdpi/ic_launcher.png
-          convert icon.png -resize 48x48   android/app/src/main/res/mipmap-mdpi/ic_launcher_round.png
-          convert icon.png -resize 72x72   android/app/src/main/res/mipmap-hdpi/ic_launcher.png
-          convert icon.png -resize 72x72   android/app/src/main/res/mipmap-hdpi/ic_launcher_round.png
-          convert icon.png -resize 96x96   android/app/src/main/res/mipmap-xhdpi/ic_launcher.png
-          convert icon.png -resize 96x96   android/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png
-          convert icon.png -resize 144x144 android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png
-          convert icon.png -resize 144x144 android/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png
-          convert icon.png -resize 192x192 android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
-          convert icon.png -resize 192x192 android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png
+          convert icon2.png -resize 48x48   android/app/src/main/res/mipmap-mdpi/ic_launcher.png
+          convert icon2.png -resize 48x48   android/app/src/main/res/mipmap-mdpi/ic_launcher_round.png
+          convert icon2.png -resize 72x72   android/app/src/main/res/mipmap-hdpi/ic_launcher.png
+          convert icon2.png -resize 72x72   android/app/src/main/res/mipmap-hdpi/ic_launcher_round.png
+          convert icon2.png -resize 96x96   android/app/src/main/res/mipmap-xhdpi/ic_launcher.png
+          convert icon2.png -resize 96x96   android/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png
+          convert icon2.png -resize 144x144 android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png
+          convert icon2.png -resize 144x144 android/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png
+          convert icon2.png -resize 192x192 android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+          convert icon2.png -resize 192x192 android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png
 
       - name: Build APK
         run: |
