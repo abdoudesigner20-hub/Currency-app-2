@@ -7,20 +7,33 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: '18'
+
       - name: Install deps
         run: npm install
+
+      - name: Create www folder
+        run: |
+          mkdir -p www
+          cp index.html www/index.html
+          cp icon2.png www/icon2.png
+          cp manifest.json www/manifest.json
+
       - name: Init Capacitor
         run: npx cap add android
+
       - name: Sync
         run: npx cap sync android
+
       - name: Build APK
         run: |
           cd android
           chmod +x gradlew
           ./gradlew assembleDebug
+
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
