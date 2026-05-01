@@ -1,6 +1,8 @@
 {
   "appId": "com.currencypro.app",
   "appName": "Currency Converter Pro",
-  "webDir": ".",
-  "server": { "androidScheme": "https" }
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  }
 }
